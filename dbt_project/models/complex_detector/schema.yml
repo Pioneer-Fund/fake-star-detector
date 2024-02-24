@@ -10,7 +10,7 @@ models:
   - name: stg_starring_actor_repo_clusters
     description: "Staging: summarize activity per repo & cross join to compare to every other repo in set"
 
-  - name: stg_pammy_repos
+  - name: stg_spammy_repos
     description: "Staging: Identify suspicious repos (activity cluster heuristic)"
 
   - name: starring_actor_summary
