@@ -16,6 +16,7 @@ setup(
         "dagster-cloud[serverless]",
         "dagster-dbt",
         "PyGithub",
+        "python-dotenv",
         "pandas",
         "matplotlib",
         "nbconvert",
