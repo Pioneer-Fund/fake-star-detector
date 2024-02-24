@@ -22,10 +22,18 @@ def fetch_stargazers(repo_name):
             "starred_at": stargazer.starred_at,
             "followers": user.followers,
             "following": user.following,
+            "public_gists": user.public_gists,  # Include public_gists
             "public_repos": user.public_repos,
-            # Add more fields as needed
+            "created_at": user.created_at,  # Ensure you're fetching this if needed
+            "updated_at": user.updated_at,  # Ensure you're fetching this if needed
+            "email": user.email,  # Include email
+            "bio": user.bio,  # Include bio
+            "blog": user.blog,  # Include blog
+            "hireable": user.hireable,  # Include hireable status
         }
+        # {'username': 'bevenky', 'starred_at': datetime.datetime(2020, 2, 20, 22, 49, 36, tzinfo=datetime.timezone.utc), 'followers': 94, 'following': 48, 'public_repos': 27}
         data.append(user_data)
+        counter += 1
         print(f"Fetched: {user.login}")
 
     return pd.DataFrame(data)
