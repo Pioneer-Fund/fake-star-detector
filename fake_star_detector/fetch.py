@@ -10,7 +10,6 @@ GITHUB_ACCESS_TOKEN = os.getenv("GITHUB_ACCESS_TOKEN")
 g = Github(GITHUB_ACCESS_TOKEN)
 
 users_data_file = "build/users_data.csv"
-user_repo_mapping_file = "build/user_repo_mapping.csv"
 
 
 def is_file_empty(file_path):
@@ -27,45 +26,38 @@ def fetch_stargazers_and_update_files(repo_name):
     """Writes header on file creation only."""
     repo = g.get_repo(repo_name)
     stargazers = repo.get_stargazers_with_dates()
+    total_stars = repo.stargazers_count
+    print(f"Found {total_stars} stargazers for {repo_name}...")
 
     users_file_needs_header = is_file_empty(users_data_file)
-    mapping_file_needs_header = is_file_empty(user_repo_mapping_file)
 
-    existing_usernames = set()
+    # Use a set of tuples to track existing username-repo mappings
+    existing_mappings = set()
     if not users_file_needs_header:
         existing_users_df = pd.read_csv(users_data_file)
-        existing_usernames = set(existing_users_df["username"])
-
-    mapping_count = 0
-    existing_mappings = set()
-    if not mapping_file_needs_header:
-        existing_mappings_df = pd.read_csv(user_repo_mapping_file)
         existing_mappings = set(
-            zip(existing_mappings_df["username"], existing_mappings_df["repo_name"])
-        )
-        mapping_count = len(
-            existing_mappings_df[existing_mappings_df["repo_name"] == repo_name]
+            zip(existing_users_df["username"], existing_users_df["repo_starred"])
         )
 
-    for stargazer in stargazers:
+    stargazers = repo.get_stargazers_with_dates()
+    for i, stargazer in enumerate(stargazers, 1):  # 1-indexed
         user = stargazer.user
         mapping = (user.login, repo_name)
 
-        if user.login not in existing_usernames:
+        if user.login not in existing_mappings:
             user_data = pd.DataFrame(
                 [
                     {
                         "starred_at": stargazer.starred_at.isoformat(),
                         "created_at": user.created_at.isoformat(),
                         "updated_at": user.updated_at.isoformat(),
-                        "last_modified": user.last_modified_datetime.isoformat(),
                         "username": user.login,
                         "user_id": user.id,  # int
                         "bio": user.bio,
                         "blog": user.blog,  # none is '' empty string
                         "email": user.email,
                         "hireable": user.hireable,  # bii==ool
-                        "name": user.name,
+                        "profile_name": user.name,
                         "twitter_username": user.twitter_username,
                         "location": user.location,
                         "repo_starred": repo_name,
@@ -80,21 +72,10 @@ def fetch_stargazers_and_update_files(repo_name):
                 ]
             )
             append_to_csv(user_data, users_data_file, users_file_needs_header)
-            existing_usernames.add(user.login)
+            existing_mappings.add(mapping)
             users_file_needs_header = False  # Only include header on first write
 
-        if mapping not in existing_mappings:
-            mapping_data = pd.DataFrame(
-                [{"username": user.login, "repo_name": repo_name}]
-            )
-            append_to_csv(
-                mapping_data, user_repo_mapping_file, mapping_file_needs_header
-            )
-            existing_mappings.add(mapping)
-            mapping_file_needs_header = False  # Only include header on first write
-
-            mapping_count += 1
-            print(f"Total mappings for {repo_name}: {mapping_count}")
+        print(f"Processing {i}/{total_stars}: {user.login} starred {repo_name}")
 
 
 if __name__ == "__main__":

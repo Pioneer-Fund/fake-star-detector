@@ -11,6 +11,14 @@
       "program": "fake_star_detector/fetch.py",
       "console": "integratedTerminal",
       "args": "notifo-io/notifo"
+    },
+    {
+      "name": "validate.py",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "fake_star_detector/validate.py",
+      "console": "integratedTerminal",
+      "args": "venetisgr/space_titanic_basic"
     }
   ]
 }
