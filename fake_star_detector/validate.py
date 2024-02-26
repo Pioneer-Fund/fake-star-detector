@@ -36,7 +36,13 @@ def _is_fake_star(row: pd.Series) -> bool:
         and (row["private_repos_owned"] <= 1)
     )
 
-    return no_profile or no_activity or dates_match
+    # VERBOSE
+    if dates_match:
+        print(f"all dates match; no_profile: {no_profile}, no_activity: {no_activity}")
+
+    is_dates_and_other = dates_match and (no_profile or no_activity)
+
+    return no_profile or no_activity or is_dates_and_other
 
 
 def validate_users_for_repo(repo_name):
