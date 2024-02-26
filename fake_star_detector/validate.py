@@ -28,17 +28,21 @@ df = pd.read_csv("stargazers.csv")
 # Applying the function to each row
 df["is_fake"] = df.apply(_validate_star, axis=1)
 
-print(
-    df[
-        [
-            "followers",
-            "following",
-            "public_gists",
-            "public_repos",
-            "created_at",
-            "starred_at",
-            "updated_at",
-            "is_fake",
-        ]
-    ]
-)
+# todo: print the sum or actual, fake, or a percentage of real
+# print(
+#     df[
+#         [
+#             "followers",
+#             "following",
+#             "public_gists",
+#             "public_repos",
+#             "created_at",
+#             "starred_at",
+#             "updated_at",
+#             "is_fake",
+#         ]
+#     ]
+# )
+
+# Printing the sum of fake stars
+print(f"Sum of fake stars: {df['is_fake'].sum()}")
