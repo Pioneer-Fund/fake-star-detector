@@ -88,7 +88,7 @@ def _is_fake_star(row: pd.Series) -> bool:
     if dates_match:
         pass
 
-    if no_profile and no_activity and dates_match:
+    if no_profile and no_activity:
         pass
 
     return no_profile and no_activity or dates_match
@@ -129,14 +129,14 @@ if __name__ == "__main__":
         # repo_name = "frasermarlow/tap-bls"  # TEST
         # validate_users_for_repo(repo_name)
         for repo in [
-            "anil-yelken/cyber-security",
-            "explodinggradients/ragas",
-            "framespot/client-py",
+            # "anil-yelken/cyber-security",
+            # "explodinggradients/ragas",
+            # "framespot/client-py",
             "frasermarlow/tap-bls",
-            "notifo-io/notifo",
-            "QuivrHQ/quivr",
-            "stackgpu/Simple-GPU",
-            "venetisgr/space_titanic_basic",
+            # "notifo-io/notifo",
+            # "QuivrHQ/quivr",
+            # "stackgpu/Simple-GPU",
+            # "venetisgr/space_titanic_basic",
         ]:
             validate_users_for_repo(repo)
 
