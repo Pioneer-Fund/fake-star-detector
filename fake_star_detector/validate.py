@@ -5,6 +5,20 @@ import sys  # Import sys to read command line arguments
 # Updated file path
 users_data_file = "build/users_data.csv"
 
+repos_with_fake_stars = [
+    "anil-yelken/cyber-security",  # 272
+    "framespot/client-py",  # 201
+    "frasermarlow/tap-bls",
+    "notifo-io/notifo",  # 700
+    "stackgpu/Simple-GPU",  # 435
+    "venetisgr/space_titanic_basic",  # 118
+]
+batch_repos = [
+    "atopile/atopile",  # 1403
+    "danswer-ai/danswer" "explodinggradients/ragas",  # 3165
+    "QuivrHQ/quivr",  # 28481
+]
+
 REPO_CREATED_AFTER_DATE = datetime.date(2023, 1, 1)
 
 
@@ -154,17 +168,7 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
 
 
 def main():
-    for repo in [
-        "anil-yelken/cyber-security",  # 272
-        "atopile/atopile",  # 1403
-        "explodinggradients/ragas",  # 3165
-        "framespot/client-py",  # 201
-        "frasermarlow/tap-bls",
-        "notifo-io/notifo",  # 700
-        "QuivrHQ/quivr",  # 28481
-        "stackgpu/Simple-GPU",  # 435
-        "venetisgr/space_titanic_basic",  # 118
-    ]:
+    for repo in [batch_repos, repos_with_fake_stars]:
         validate_users_for_repo(repo)
     display_definitions()
     display_footer()
@@ -173,8 +177,6 @@ def main():
 if __name__ == "__main__":
     if len(sys.argv) != 2:
         main()
-        # print("Usage: python validate.py <repo_name>")
-
     else:
         repo_name = sys.argv[1]
         validate_users_for_repo(repo_name)
