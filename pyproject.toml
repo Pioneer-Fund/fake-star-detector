@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "fake_star_detector"
-version = "0.1.0"
-description = ""
+version = "0.2.0"
+description = "Complete python library to fetch and validate stars. Based on dagster/fake-stars"
 authors = ["Eric Norman"]
 
 [build-system]
