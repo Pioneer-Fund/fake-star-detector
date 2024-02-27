@@ -15,7 +15,8 @@ repos_with_fake_stars = [
 ]
 batch_repos = [
     "atopile/atopile",  # 1403
-    "danswer-ai/danswer" "explodinggradients/ragas",  # 3165
+    "danswer-ai/danswer",
+    "explodinggradients/ragas",  # 3165
     "QuivrHQ/quivr",  # 28481
 ]
 

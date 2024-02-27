@@ -56,7 +56,7 @@ def fetch_stargazers_and_update_files(repo_name):
                         "bio": user.bio,
                         "blog": user.blog,  # none is '' empty string
                         "email": user.email,
-                        "hireable": user.hireable,  # bii==ool
+                        "hireable": user.hireable,  # bool
                         "profile_name": user.name,
                         "twitter_username": user.twitter_username,
                         "location": user.location,
