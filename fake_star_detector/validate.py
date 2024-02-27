@@ -150,24 +150,27 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
     )
 
 
+def main():
+    for repo in [
+        "anil-yelken/cyber-security",  # 272
+        "atopile/atopile",  # 1403
+        "explodinggradients/ragas",  # 3165
+        "framespot/client-py",  # 201
+        "frasermarlow/tap-bls",
+        "notifo-io/notifo",  # 700
+        "QuivrHQ/quivr",  # 28481
+        "stackgpu/Simple-GPU",  # 435
+        "venetisgr/space_titanic_basic",  # 118
+    ]:
+        validate_users_for_repo(repo)
+    display_definitions()
+
+
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        # repo_name = "frasermarlow/tap-bls"  # TEST
-        # validate_users_for_repo(repo_name)
-        for repo in [
-            # "anil-yelken/cyber-security",     #272
-            "atopile/atopile",  # 1403
-            "explodinggradients/ragas",  # 3165
-            # "framespot/client-py",    # 201
-            "frasermarlow/tap-bls",
-            "notifo-io/notifo",  # 700
-            "QuivrHQ/quivr",  # 28481
-            # "stackgpu/Simple-GPU",    # 435
-            "venetisgr/space_titanic_basic",  # 118
-        ]:
-            validate_users_for_repo(repo)
+        main()
+        # print("Usage: python validate.py <repo_name>")
 
-        print("Usage: python validate.py <repo_name>")
     else:
         repo_name = sys.argv[1]
         validate_users_for_repo(repo_name)
