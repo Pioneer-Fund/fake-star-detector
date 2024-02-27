@@ -96,6 +96,19 @@ def validate_users_for_repo(repo_name: str):
         print(f"File not found: {e.filename}")
 
 
+def display_definitions():
+    print("Definition: Dates Match: created_at == starred_at == last_modified_at")
+    print(
+        f"Definition: Created recently: created on or after {REPO_CREATED_AFTER_DATE}"
+    )
+    print(
+        f"Definition: No activity: followers <= 1, following <= 1, public gists == 0, public repos <= 4"
+    )
+    print(
+        f"Definition: No bio: email, hireable, bio, blog, and twitter username are empty"
+    )
+
+
 def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
     """Displays the validation results for the specified repository."""
     total_users = len(users_df)
