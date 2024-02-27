@@ -98,16 +98,18 @@ def validate_users_for_repo(repo_name: str):
 
 def display_definitions():
     print()
-    print("Definition: Dates Match: created_at == starred_at == last_modified_at")
+    print("Definitions:")
+    print(" - Dates Match: created_at == starred_at == last_modified_at")
+    print(f" - Created recently: created on or after {REPO_CREATED_AFTER_DATE}")
     print(
-        f"Definition: Created recently: created on or after {REPO_CREATED_AFTER_DATE}"
+        f" - No activity: followers <= 1, following <= 1, public gists == 0, public repos <= 4"
     )
-    print(
-        f"Definition: No activity: followers <= 1, following <= 1, public gists == 0, public repos <= 4"
-    )
-    print(
-        f"Definition: No bio: email, hireable, bio, blog, and twitter username are empty"
-    )
+    print(f" - No bio: email, hireable, bio, blog, and twitter username are empty")
+
+
+def display_footer():
+    print()
+    print(f"**Based on: dagster.io/blog/fake-stars**")
 
 
 def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
@@ -139,15 +141,15 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
     ) * 100
 
     print(f"\nCheck users who starred `{repo_name}`:")
-    print(f"Total users: {total_users:,}")
+    print(f" - Total users: {total_users:,}")
     print(
-        f"Created recently AND no activity AND no bio: {total_recently_created_and_no_activity_and_no_bio} ({percentage_recently_created_and_no_activity_and_no_bio:.2f}%)"
+        f" - Created recently AND no activity AND no bio: {total_recently_created_and_no_activity_and_no_bio} ({percentage_recently_created_and_no_activity_and_no_bio:.2f}%)"
     )
     print(
-        f"Dates match (created_at == starred_at == last_modified_at): {total_dates_match} ({percentage_dates_match:.2f}%)"
+        f" - Dates match (created_at == starred_at == last_modified_at): {total_dates_match} ({percentage_dates_match:.2f}%)"
     )
     print(
-        f"Created recently AND no activity AND no bio AND dates match: {total_recently_created_and_no_activity_and_no_bio_and_dates_match} ({percentage_recently_created_and_no_activity_and_no_bio_and_dates_match:.2f}%)"
+        f" - Created recently AND no activity AND no bio AND dates match: {total_recently_created_and_no_activity_and_no_bio_and_dates_match} ({percentage_recently_created_and_no_activity_and_no_bio_and_dates_match:.2f}%)"
     )
 
 
@@ -165,6 +167,7 @@ def main():
     ]:
         validate_users_for_repo(repo)
     display_definitions()
+    display_footer()
 
 
 if __name__ == "__main__":
