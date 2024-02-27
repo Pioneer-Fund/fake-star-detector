@@ -19,6 +19,7 @@ batch_repos = [
     "explodinggradients/ragas",  # 3165
     "QuivrHQ/quivr",  # 28481
 ]
+other_repos = ["posthog/posthog"]  # 15880
 
 REPO_CREATED_AFTER_DATE = datetime.date(2023, 1, 1)
 
@@ -169,7 +170,7 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
 
 
 def main():
-    for repo in [batch_repos, repos_with_fake_stars]:
+    for repo in [batch_repos, repos_with_fake_stars, other_repos]:
         validate_users_for_repo(repo)
     display_definitions()
     display_footer()
