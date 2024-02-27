@@ -11,6 +11,7 @@ build-backend = "setuptools.build_meta"
 [tool.poetry.dependencies]
 python = "^3.11.8"
 github3-py = "^4.0.1"
+pandas = "^2.2.1"
 
 [tool.poetry.dev-dependencies]
 pytest = "^8.0.1"
