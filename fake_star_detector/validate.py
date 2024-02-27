@@ -2,8 +2,10 @@ import pandas as pd
 import datetime
 import sys  # Import sys to read command line arguments
 
+from fake_star_detector.config import USERS_DATA_FILE_PATH
+
+
 # Updated file path
-users_data_file = "build/users_data.csv"
 
 repos_with_fake_stars = [
     "anil-yelken/cyber-security",  # 272
@@ -86,7 +88,7 @@ def _is_recently_created(row: pd.Series) -> bool:
     return created_at >= REPO_CREATED_AFTER_DATE
 
 
-def validate_users_for_repo(repo_name: str):
+def validate_users_for_repo(repo_name: str, users_data_file=USERS_DATA_FILE_PATH):
     """Looks for potentially not real (i.e. purchased) stars
     based on specific criteria.
 

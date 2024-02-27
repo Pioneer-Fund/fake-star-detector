@@ -4,12 +4,12 @@ import pandas as pd
 import os
 from dotenv import load_dotenv
 
+from fake_star_detector.config import USERS_DATA_FILE_PATH
+
 load_dotenv()
 
 GITHUB_ACCESS_TOKEN = os.getenv("GITHUB_ACCESS_TOKEN")
 g = Github(GITHUB_ACCESS_TOKEN)
-
-users_data_file = "build/users_data.csv"
 
 
 def is_file_empty(file_path):
@@ -22,7 +22,7 @@ def append_to_csv(df, file_path, include_header):
     df.to_csv(file_path, mode="a", index=False, header=include_header, encoding="utf-8")
 
 
-def fetch_stargazers_and_update_files(repo_name):
+def fetch_stargazers_and_update_files(repo_name, users_data_file=USERS_DATA_FILE_PATH):
     """Writes header on file creation only."""
     repo = g.get_repo(repo_name)
     stargazers = repo.get_stargazers_with_dates()
