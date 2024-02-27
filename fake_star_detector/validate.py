@@ -162,6 +162,14 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
         & (users_df["_is_no_bio"])
         & (users_df["_is_recently_created"])
     ].shape[0]
+    total_dates_match_or_recently_created_and_no_activity_and_no_bio = users_df[
+        (users_df["_is_dates_match"])
+        | (
+            (users_df["_is_recently_created"])
+            & (users_df["_is_no_activity"])
+            & (users_df["_is_no_bio"])
+        )
+    ].shape[0]
 
     percentage_dates_match = (total_dates_match / total_users) * 100
     percentage_recently_created_and_no_activity_and_no_bio = (
@@ -170,17 +178,23 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
     percentage_recently_created_and_no_activity_and_no_bio_and_dates_match = (
         total_recently_created_and_no_activity_and_no_bio_and_dates_match / total_users
     ) * 100
+    percentage_dates_match_or_recently_created_and_no_activity_and_no_bio = (
+        total_dates_match_or_recently_created_and_no_activity_and_no_bio / total_users
+    ) * 100
 
     print(f"\n[experimental] Check users who starred `{repo_name}`:")
     print(f" - Total users: {total_users:,}")
     print(
-        f" - Starred on date created: {total_dates_match} ({percentage_dates_match:.2f}%)"
+        f" - Starred on date created, no activity since: {total_dates_match} ({percentage_dates_match:.2f}%)"
     )
     print(
-        f" - Account created recently, with limited activity, and empty bio: {total_recently_created_and_no_activity_and_no_bio} ({percentage_recently_created_and_no_activity_and_no_bio:.2f}%)"
+        f" - Recent account, limited activity, empty profile: {total_recently_created_and_no_activity_and_no_bio} ({percentage_recently_created_and_no_activity_and_no_bio:.2f}%)"
     )
     print(
-        f" - Account created recently, with limited activity, and empty bio AND starred on date created: {total_recently_created_and_no_activity_and_no_bio_and_dates_match} ({percentage_recently_created_and_no_activity_and_no_bio_and_dates_match:.2f}%)"
+        f" - Either: {total_dates_match_or_recently_created_and_no_activity_and_no_bio} ({percentage_dates_match_or_recently_created_and_no_activity_and_no_bio:.2f}%)"
+    )
+    print(
+        f" - Both: {total_recently_created_and_no_activity_and_no_bio_and_dates_match} ({percentage_recently_created_and_no_activity_and_no_bio_and_dates_match:.2f}%)"
     )
 
 
