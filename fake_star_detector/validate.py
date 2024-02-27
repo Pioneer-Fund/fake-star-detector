@@ -117,36 +117,10 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
         return
 
     total_dates_match = users_df["_is_dates_match"].sum()
-    total_no_activity = users_df["_is_no_activity"].sum()
-    total_no_bio = users_df["_is_no_bio"].sum()
-    total_recently_created = users_df["_is_recently_created"].sum()
-
-    # users with _is_dates_match and _is_no_activity and _is_no_bio
-    total_no_activity_and_no_bio = users_df[
-        (users_df["_is_no_activity"]) & (users_df["_is_no_bio"])
-    ].shape[0]
-    total_no_activity_and_no_bio_and_dates_match = users_df[
-        (users_df["_is_dates_match"])
-        & (users_df["_is_no_activity"])
-        & (users_df["_is_no_bio"])
-    ].shape[0]
-    total_recently_created_and_no_activity = users_df[
-        (users_df["_is_recently_created"]) & (users_df["_is_no_activity"])
-    ].shape[0]
-    # created recently and no bio
-    total_recently_created_and_no_bio = users_df[
-        (users_df["_is_recently_created"]) & (users_df["_is_no_bio"])
-    ].shape[0]
     total_recently_created_and_no_activity_and_no_bio = users_df[
         (users_df["_is_recently_created"])
         & (users_df["_is_no_activity"])
         & (users_df["_is_no_bio"])
-    ].shape[0]
-    total_no_activity_and_dates_match = users_df[
-        (users_df["_is_dates_match"]) & (users_df["_is_no_activity"])
-    ].shape[0]
-    total_no_bio_and_dates_match = users_df[
-        (users_df["_is_dates_match"]) & (users_df["_is_no_bio"])
     ].shape[0]
     total_recently_created_and_no_activity_and_no_bio_and_dates_match = users_df[
         (users_df["_is_dates_match"])
@@ -156,59 +130,20 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
     ].shape[0]
 
     percentage_dates_match = (total_dates_match / total_users) * 100
-    percentage_no_activity = (total_no_activity / total_users) * 100
-    percentage_no_bio = (total_no_bio / total_users) * 100
-    percentage_no_activity_and_no_bio = (
-        total_no_activity_and_no_bio / total_users
-    ) * 100
-    percentage_all_checks = (
-        total_no_activity_and_no_bio_and_dates_match / total_users
-    ) * 100
-    percentage_recently_created_and_no_activity = (
-        total_recently_created_and_no_activity / total_users
-    ) * 100
-    percentage_recently_created_and_no_bio = (
-        total_recently_created_and_no_bio / total_users
-    ) * 100
     percentage_recently_created_and_no_activity_and_no_bio = (
         total_recently_created_and_no_activity_and_no_bio / total_users
-    ) * 100
-    percentage_no_activity_and_dates_match = (
-        total_no_activity_and_dates_match / total_users
-    ) * 100
-    percentage_no_bio_and_dates_match = (
-        total_no_bio_and_dates_match / total_users
     ) * 100
     percentage_recently_created_and_no_activity_and_no_bio_and_dates_match = (
         total_recently_created_and_no_activity_and_no_bio_and_dates_match / total_users
     ) * 100
 
-    print(f"\nStar check for repo `{repo_name}`:")
+    print(f"\Check users who starred `{repo_name}`:")
     print(f"Total users: {total_users:,}")
-    print(f"Matching dates: {total_dates_match} ({percentage_dates_match:.2f}%)")
-    print(f"No activity: {total_no_activity} ({percentage_no_activity:.2f}%)")
-    print(f"No bio: {total_no_bio} ({percentage_no_bio:.2f}%)")
-    print(
-        f"Created recently AND no activity: {total_recently_created_and_no_activity} ({percentage_recently_created_and_no_activity:.2f}%)"
-    )
-    print(
-        f"Created recently AND no bio: {total_recently_created_and_no_bio} ({percentage_recently_created_and_no_bio:.2f}%)"
-    )
     print(
         f"Created recently AND no activity AND no bio: {total_recently_created_and_no_activity_and_no_bio} ({percentage_recently_created_and_no_activity_and_no_bio:.2f}%)"
     )
     print(
-        f"No activity AND no bio: {total_no_activity_and_no_bio} ({percentage_no_activity_and_no_bio:.2f}%)"
-    )
-    print(
-        f"No activity AND dates match: {total_no_activity_and_dates_match} ({percentage_no_activity_and_dates_match:.2f}%)"
-    )
-    print(
-        f"No bio AND dates match: {total_no_bio_and_dates_match} ({percentage_no_bio_and_dates_match:.2f}%)"
-    )
-
-    print(
-        f"No activity AND no bio AND dates match: {total_no_activity_and_no_bio_and_dates_match} ({percentage_all_checks:.2f}%)"
+        f"Dates match (created_at == starred_at == last_modified_at): {total_dates_match} ({percentage_dates_match:.2f}%)"
     )
     print(
         f"Created recently AND no activity AND no bio AND dates match: {total_recently_created_and_no_activity_and_no_bio_and_dates_match} ({percentage_recently_created_and_no_activity_and_no_bio_and_dates_match:.2f}%)"
