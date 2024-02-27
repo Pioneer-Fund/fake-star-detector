@@ -19,14 +19,6 @@
       "program": "fake_star_detector/validate.py",
       "console": "integratedTerminal",
       "args": "venetisgr/space_titanic_basic"
-    },
-    {
-      "name": "validate.py - same dates",
-      "type": "debugpy",
-      "request": "launch",
-      "program": "fake_star_detector/validate.py",
-      "console": "integratedTerminal",
-      "args": "stackgpu/Simple-GPU"
     }
   ]
 }
