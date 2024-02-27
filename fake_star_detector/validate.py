@@ -2,31 +2,13 @@ import pandas as pd
 import datetime
 import sys  # Import sys to read command line arguments
 
-from fake_star_detector.config import USERS_DATA_FILE_PATH
+from fake_star_detector.config import (
+    USERS_DATA_FILE_PATH,
+    repos_with_fake_stars,
+    batch_repos,
+    other_repos,
+)
 
-
-# Updated file path
-
-repos_with_fake_stars = [
-    "anil-yelken/cyber-security",  # 272
-    "framespot/client-py",  # 201
-    "frasermarlow/tap-bls",
-    "notifo-io/notifo",  # 700
-    "stackgpu/Simple-GPU",  # 435
-    "venetisgr/space_titanic_basic",  # 118
-]
-batch_repos = [
-    "aidenybai/million",  # 14,426
-    "atopile/atopile",  # 1,403
-    "danswer-ai/danswer",  # 8,087
-    "explodinggradients/ragas",  # 3,165
-    "homanp/superagent",  # 3,891
-    "stackwiseai/stackwise"  # 138
-    "QuivrHQ/quivr",  # 28,481
-]
-other_repos = [
-    # "posthog/posthog"
-]  # 15880
 
 REPO_CREATED_AFTER_DATE = datetime.date(2023, 1, 1)
 
