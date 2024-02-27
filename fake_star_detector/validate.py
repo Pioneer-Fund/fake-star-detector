@@ -97,6 +97,7 @@ def validate_users_for_repo(repo_name: str):
 
 
 def display_definitions():
+    print()
     print("Definition: Dates Match: created_at == starred_at == last_modified_at")
     print(
         f"Definition: Created recently: created on or after {REPO_CREATED_AFTER_DATE}"
@@ -137,7 +138,7 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
         total_recently_created_and_no_activity_and_no_bio_and_dates_match / total_users
     ) * 100
 
-    print(f"\Check users who starred `{repo_name}`:")
+    print(f"\nCheck users who starred `{repo_name}`:")
     print(f"Total users: {total_users:,}")
     print(
         f"Created recently AND no activity AND no bio: {total_recently_created_and_no_activity_and_no_bio} ({percentage_recently_created_and_no_activity_and_no_bio:.2f}%)"
