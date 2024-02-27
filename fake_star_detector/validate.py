@@ -104,6 +104,10 @@ def validate_users_for_repo(repo_name: str, users_data_file=USERS_DATA_FILE_PATH
         users_df = pd.read_csv(users_data_file)
         users_df = users_df[users_df["repo_starred"] == repo_name]
 
+        if users_df.empty:
+            print(f"No users found for repo: `{repo_name}`")
+            return
+
         users_df["_is_dates_match"] = users_df.apply(_is_dates_match, axis=1)
         users_df["_is_no_activity"] = users_df.apply(_is_no_activity, axis=1)
         users_df["_is_no_bio"] = users_df.apply(_is_no_bio, axis=1)
