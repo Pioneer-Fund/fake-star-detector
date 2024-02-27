@@ -1,4 +1,12 @@
+[tool.poetry]
+name = "fake_star_detector"
+version = "0.1.0"
+description = ""
+authors = ["Eric Norman"]
+
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+[tool.poetry.dev-dependencies]
+pytest = "^8.0.1"
