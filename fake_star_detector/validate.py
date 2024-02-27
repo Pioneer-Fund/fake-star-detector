@@ -16,12 +16,17 @@ repos_with_fake_stars = [
     "venetisgr/space_titanic_basic",  # 118
 ]
 batch_repos = [
-    "atopile/atopile",  # 1403
-    "danswer-ai/danswer",
-    "explodinggradients/ragas",  # 3165
-    "QuivrHQ/quivr",  # 28481
+    "aidenybai/million",  # 14,426
+    "atopile/atopile",  # 1,403
+    "danswer-ai/danswer",  # 8,087
+    "explodinggradients/ragas",  # 3,165
+    "homanp/superagent",  # 3,891
+    "stackwiseai/stackwise"  # 138
+    "QuivrHQ/quivr",  # 28,481
 ]
-other_repos = ["posthog/posthog"]  # 15880
+other_repos = [
+    # "posthog/posthog"
+]  # 15880
 
 REPO_CREATED_AFTER_DATE = datetime.date(2023, 1, 1)
 
