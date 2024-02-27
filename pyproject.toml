@@ -8,5 +8,8 @@ authors = ["Eric Norman"]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+[tool.poetry.dependencies]
+python = "^3.11.8"
+
 [tool.poetry.dev-dependencies]
 pytest = "^8.0.1"
