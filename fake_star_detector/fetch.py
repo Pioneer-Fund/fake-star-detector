@@ -1,5 +1,5 @@
 import sys
-from github import Github
+from github import Github, GithubException
 import pandas as pd
 import os
 from dotenv import load_dotenv
@@ -24,10 +24,14 @@ def append_to_csv(df, file_path, include_header):
 
 def fetch_stargazers_and_update_files(repo_name, users_data_file=USERS_DATA_FILE_PATH):
     """Writes header on file creation only."""
-    repo = g.get_repo(repo_name)
-    stargazers = repo.get_stargazers_with_dates()
-    total_stars = repo.stargazers_count
-    print(f"Found {total_stars} stargazers for {repo_name}...")
+    try:
+        repo = g.get_repo(repo_name)
+        stargazers = repo.get_stargazers_with_dates()
+        total_stars = repo.stargazers_count
+        print(f"Found {total_stars} stargazers for {repo_name}...")
+    except GithubException as e:
+        print(f"Error fetching repository: {e}")
+        return
 
     users_file_needs_header = is_file_empty(users_data_file)
 
