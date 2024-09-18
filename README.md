@@ -26,6 +26,10 @@ python fake_star_detector/delete.py org/repo
 
 Multiple repos stored in same local data file.
 
+## Setup
+
+Generate GitHub [personal access token](https://github.com/settings/tokens) (looks like `ghp_...`): with scope `public_repo`
+
 # Reference
 
 Based on [dagster/fake-star-detector](https://dagster.io/blog/fake-stars), a simple Dagster project to analyze the number of fake GitHub stars on any GitHub repository. It is a companion to the blog post found [on the Dagster blog](https://dagster.io/blog/fake-stars).
@@ -35,3 +39,15 @@ Specifically, we used the simple model
 
 - [Complex detector](#running-the-complex-model-using-bigquery-archive-data): An alternative detection model which runs a sophisticated clustering algorithm as well as the heuristic, using the public [GH Archive](https://www.gharchive.org) available in Bigquery. This model is written in SQL and uses [dbt](https://github.com/dbt-labs/dbt-core) alongside Dagster.
   - _Note: You can run this within the limits of a free-tier BQ account, but the analysis will be reduced in scope. By default, this model only scans data in 2023 on a small repository, in order to make it stay within the free-tier quota._
+
+# Dev notes
+
+ending repo with a slack will fail;
+
+```sh
+% curl -H "Authorization: token $TOKEN" https://api.github.com/repos/pretzelai/pretzelai/
+{
+  "message": "Not Found",
+  "documentation_url": "https://docs.github.com/rest"
+}
+```
