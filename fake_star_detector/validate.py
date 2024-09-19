@@ -138,12 +138,6 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
         & (users_df["_is_no_activity"])
         & (users_df["_is_no_bio"])
     ].shape[0]
-    total_recently_created_and_no_activity_and_no_bio_and_dates_match = users_df[
-        (users_df["_is_dates_match"])
-        & (users_df["_is_no_activity"])
-        & (users_df["_is_no_bio"])
-        & (users_df["_is_recently_created"])
-    ].shape[0]
     total_dates_match_or_recently_created_and_no_activity_and_no_bio = users_df[
         (users_df["_is_dates_match"])
         | (
@@ -157,9 +151,6 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
     percentage_recently_created_and_no_activity_and_no_bio = (
         total_recently_created_and_no_activity_and_no_bio / total_users
     ) * 100
-    percentage_recently_created_and_no_activity_and_no_bio_and_dates_match = (
-        total_recently_created_and_no_activity_and_no_bio_and_dates_match / total_users
-    ) * 100
     percentage_dates_match_or_recently_created_and_no_activity_and_no_bio = (
         total_dates_match_or_recently_created_and_no_activity_and_no_bio / total_users
     ) * 100
@@ -169,7 +160,6 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
         len(f"{total_dates_match:,}"),
         len(f"{total_recently_created_and_no_activity_and_no_bio:,}"),
         len(f"{total_dates_match_or_recently_created_and_no_activity_and_no_bio:,}"),
-        len(f"{total_recently_created_and_no_activity_and_no_bio_and_dates_match:,}"),
     )
     max_width_percentage = max(
         len("100.00"),
@@ -177,9 +167,6 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
         len(f"{percentage_recently_created_and_no_activity_and_no_bio:.2f}"),
         len(
             f"{percentage_dates_match_or_recently_created_and_no_activity_and_no_bio:.2f}"
-        ),
-        len(
-            f"{percentage_recently_created_and_no_activity_and_no_bio_and_dates_match:.2f}"
         ),
     )
     template = f"{{:>{max_width_number},}} ({{:>{max_width_percentage}.2f}}%) - {{}}"
@@ -204,13 +191,6 @@ def display_results(users_df: pd.DataFrame, repo_name: str) -> None:
             total_dates_match_or_recently_created_and_no_activity_and_no_bio,
             percentage_dates_match_or_recently_created_and_no_activity_and_no_bio,
             "Either",
-        )
-    )
-    print(
-        template.format(
-            total_recently_created_and_no_activity_and_no_bio_and_dates_match,
-            percentage_recently_created_and_no_activity_and_no_bio_and_dates_match,
-            "Both",
         )
     )
 
