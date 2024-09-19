@@ -10,7 +10,7 @@ from fake_star_detector.config import (
 )
 
 
-REPO_CREATED_AFTER_DATE = datetime.date(2023, 1, 1)
+REPO_CREATED_AFTER_DATE = datetime.date(2024, 1, 1)
 
 
 def _is_dates_match(row: pd.Series) -> bool:
