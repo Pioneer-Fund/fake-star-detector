@@ -1,3 +1,7 @@
+# TODO:S
+
+- be smarter about fetch, to check if there's existing data, and ask for confirmation about deleting it
+
 # fake-star-detector
 
 An attempt to indentify

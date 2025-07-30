@@ -14,7 +14,9 @@ batch_repos = [
     "danswer-ai/danswer",  # 8,087
     "explodinggradients/ragas",  # 3,165
     "homanp/superagent",  # 3,891
+    "nCompass-tech/nCompass",
     "stackwiseai/stackwise"  # 138
+    "Titan-Systems/titan",  # 228
     "QuivrHQ/quivr",  # 28,481
 ]
 other_repos = [
